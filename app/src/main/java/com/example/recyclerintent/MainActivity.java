@@ -5,7 +5,10 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.widget.EditText;
 
 import com.example.recyclerintent.adaptadores.intentAdaptador;
@@ -26,12 +29,15 @@ public class MainActivity extends AppCompatActivity {
 
         List<Intents> intents =new ArrayList<>();
 
-        intents.add(new Intents("camara"));
-        intents.add(new Intents("datos"));
-        intents.add(new Intents("youtube"));
-        intents.add(new Intents("llamada"));
-        intents.add(new Intents("google"));
-        intents.add(new Intents("facebook"));
+        intents.add(new Intents("youtube",new Intent(Intent.ACTION_VIEW, Uri.parse
+                ("https://www.youtube.com"))));
+        intents.add(new Intents("camara",new Intent(MediaStore.ACTION_IMAGE_CAPTURE)));
+        intents.add(new Intents("facebook",new Intent(Intent.ACTION_VIEW, Uri.parse
+                ("https://www.facebook.com"))));
+        intents.add(new Intents("google",new Intent(Intent.ACTION_VIEW, Uri.parse
+                ("https://www.google.com"))));
+        intents.add(new Intents("llamada",new Intent(Intent.ACTION_CALL,Uri.parse("tel: 8721371167"))));
+        intents.add(new Intents("otro activity",new Intent(this,parametros.class)));
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.HORIZONTAL));

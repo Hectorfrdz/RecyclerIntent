@@ -1,16 +1,20 @@
 package com.example.recyclerintent.adaptadores;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recyclerintent.R;
@@ -24,6 +28,7 @@ import modelos.Intents;
 public class intentAdaptador extends RecyclerView.Adapter<intentAdaptador.viewHolder> {
 
     List<Intents> I;
+    int request_code = 200;
 
     public intentAdaptador(List<Intents>I){this.I = I;}
 
@@ -57,37 +62,7 @@ public class intentAdaptador extends RecyclerView.Adapter<intentAdaptador.viewHo
         }
 
         private void onClick(View view) {
-            if(Objects.equals((String) txtintent.getText(), "camara"))
-            {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                view.getContext().startActivity(intent);
-            }
-            else if(txtintent.getText()=="datos")
-            {
-                Toast.makeText(view.getContext(),"En mantenimiento",Toast.LENGTH_LONG).show();
-            }
-            else if(txtintent.getText()=="llamada")
-            {
-                Toast.makeText(view.getContext(),"En mantenimiento",Toast.LENGTH_LONG).show();
-            }
-            else if(txtintent.getText()=="youtube")
-            {
-                Uri webpage = Uri.parse("https://www.youtube.com/watch?v=FK7x3kZZud4");
-                Intent intent = new Intent(Intent.ACTION_VIEW,webpage);
-                view.getContext().startActivity(intent);
-            }
-            else if(txtintent.getText()=="facebook")
-            {
-                Uri webpage = Uri.parse("https://www.facebook.com");
-                Intent intent = new Intent(Intent.ACTION_VIEW,webpage);
-                view.getContext().startActivity(intent);
-            }
-            else if(txtintent.getText()=="google")
-            {
-                Uri webpage = Uri.parse("https://www.google.com");
-                Intent intent = new Intent(Intent.ACTION_VIEW,webpage);
-                view.getContext().startActivity(intent);
-            }
+            view.getContext().startActivity(intentHolder.getAction());
         }
 
         public void setData(Intents intents) {
